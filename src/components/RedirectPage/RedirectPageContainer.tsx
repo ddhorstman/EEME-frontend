@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { NotFoundPage } from "../NotFoundPage";
-import axios from "axios";
 
-import config from "../../config";
+import { axiosWithoutAuth } from "../../utils/axiosWithAuth";
 
 interface Props {
   location: {
@@ -18,10 +17,8 @@ const RedirectPageContainer: React.FC<Props> = props => {
   } = props;
 
   React.useEffect(() => {
-    const queryUrl = `https://cors-anywhere-citrics.herokuapp.com/${
-      config.backendUrl
-    }/links/decode/${pathname.slice(1)}`;
-    axios
+    const queryUrl = `/links/decode/${pathname.slice(1)}`;
+    axiosWithoutAuth()
       .get(queryUrl)
       .then(r => r.data.target)
       .then(target => (window.location.href = target))
