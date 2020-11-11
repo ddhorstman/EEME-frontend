@@ -9,12 +9,8 @@ interface Props {
   };
 }
 
-const RedirectPageContainer: React.FC<Props> = props => {
+const RedirectPageContainer: React.FC<Props> = ({ location: { pathname } }) => {
   const [decodeFailed, setDecodeFailed] = useState<boolean>(false);
-
-  let {
-    location: { pathname },
-  } = props;
 
   React.useEffect(() => {
     const queryUrl = `/links/decode/${pathname.slice(1)}`;
