@@ -8,7 +8,7 @@ function App() {
     <Router>
       <Switch>
         <Route exact path='/' component={LandingPage} />
-        <Route component={RedirectPage} />
+        <Route path='/:encoded' component={RedirectPage} />
       </Switch>
     </Router>
   );
