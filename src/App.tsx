@@ -7,7 +7,9 @@ function App() {
   return (
     <Router>
       <Switch>
+        {/* Homepage */}
         <Route exact path='/' component={LandingPage} />
+        {/* Any location that isn't recognized will be treated as a shortened URL */}
         <Route path='/:encoded' component={RedirectPage} />
       </Switch>
     </Router>

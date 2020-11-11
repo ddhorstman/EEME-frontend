@@ -13,7 +13,13 @@ const RedirectPageContainer: React.FC<RouteComponentProps<MatchParams>> = ({
     params: { encoded },
   },
 }) => {
+  // Store status of URL decoding
+  // To determine whether to render a 404 page or nothing
   const [decodeFailed, setDecodeFailed] = useState<boolean>(false);
+
+  // Query the backend to decode the URL
+  // On success, extract the 'target' and redirect to that page
+  // On failure, render a 404 page
   React.useEffect(() => {
     const queryUrl = `/links/decode/${encoded}`;
     axiosWithoutAuth()
@@ -23,6 +29,8 @@ const RedirectPageContainer: React.FC<RouteComponentProps<MatchParams>> = ({
       .catch(() => setDecodeFailed(true));
   }, [encoded]);
 
+  // Will render nothing while the query is running
+  // If it succeeds, we will be redirected away rather than rendering something
   return decodeFailed ? <NotFoundPage /> : null;
 };
 
