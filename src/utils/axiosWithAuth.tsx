@@ -51,7 +51,7 @@ export function axiosWithoutAuth(options?: AxiosRequestConfig) {
  * if the component unmounts.
  * @param {AxiosRequestConfig} [options] The options to pass on to axios.create()
  */
-export function axiosWithAuthCancellable(options?: AxiosRequestConfig) {
+export function axiosCancellable(options?: AxiosRequestConfig) {
   let source = axios.CancelToken.source();
   let unmountedInternal = false;
 
@@ -77,13 +77,24 @@ export function axiosWithAuthCancellable(options?: AxiosRequestConfig) {
    * if the component unmounts using cancelAPICall().
    * @param {AxiosRequestConfig | undefined} [optionsInner] The options to be passed to axios.create()
    */
-  const axiosWithAuthC = (optionsInner: AxiosRequestConfig | undefined = options) =>
-    axiosWithAuth({ ...optionsInner, cancelToken: source.token });
+  const axiosWithAuthC = (
+    optionsInner: AxiosRequestConfig | undefined = options
+  ) => axiosWithAuth({ ...optionsInner, cancelToken: source.token });
+
+  /**
+   * A function to perform axios calls with the ability to cancel the call
+   * if the component unmounts using cancelAPICall().
+   * @param {AxiosRequestConfig | undefined} [optionsInner] The options to be passed to axios.create()
+   */
+  const axiosWithoutAuthC = (
+    optionsInner: AxiosRequestConfig | undefined = options
+  ) => axiosWithoutAuth({ ...optionsInner, cancelToken: source.token });
 
   return {
     isCancel: axios.isCancel,
     unmounted,
     axiosWithAuth: axiosWithAuthC,
+    axiosWithoutAuth: axiosWithoutAuthC,
     cancelAPICall,
   };
 }
