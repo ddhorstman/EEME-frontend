@@ -34,14 +34,15 @@ const RenderLinkShortener: React.FC<Props> = ({
           {/* Wrapping the elements in a FormGroup allows the Input and Button to stay aligned */}
           <FormGroup style={{ flexDirection: "row" }}>
             <OutlinedInput
+              style={{ borderRadius: "4px 0px 0px 4px", minWidth: 500 }}
               placeholder='Me-ify your link...'
               disabled={isLoading}
               value={value}
               onInput={handleInput}
-              style={{ minWidth: "500px" }}
             />
             <Button
-              onClick={() => handleSubmit()}
+              style={{ borderRadius: "0px 4px 4px 0px" }}
+              type='submit'
               disabled={error || isLoading}
               color='primary'
               variant='contained'

@@ -58,7 +58,7 @@ class LinkShortenerSubmission extends React.Component<Props, State> {
   render() {
     return (
       <RenderLinkShortener
-        helperText={this.state.error ? "Please enter a valid URL" : null}
+        helperText={"Please enter a valid URL"}
         isLoading={this.state.isLoading}
         error={this.state.error}
         value={this.state.url}
