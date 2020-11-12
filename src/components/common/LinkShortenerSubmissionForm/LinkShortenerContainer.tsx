@@ -31,28 +31,28 @@ class LinkShortenerSubmission extends React.Component<Props, State> {
   handleSubmit: FormSubmissionHandler = e => {
     // Stop the default form event from reloading the page
     e?.preventDefault();
-    // If the user hasn't entered a url, do nothing
-    if (this.state.url === "") return;
+
+    const isValidUrl = this.validateUrl(this.state.url);
+
+    // If the url is invalid, set error and don't submit
+    if (!isValidUrl) {
+      this.setState({ error: true });
+      return;
+    }
 
     //If the url has been validated successfully, send a request to the backend
-    if (!this.state.error) {
-      // TODO: Replace this with the real backend code
-
-      this.setState({ isLoading: true });
-      // axiosWithoutAuth()
-      //   .post("/links/encode", { target: this.state.url })
-      //   .then(console.log);
-      window.setTimeout(
-        () => this.setState({ isLoading: false, url: "" }),
-        1000
-      );
-    }
+    // TODO: Replace this with the real backend code
+    this.setState({ isLoading: true });
+    // axiosWithoutAuth()
+    //   .post("/links/encode", { target: this.state.url })
+    //   .then(console.log);
+    window.setTimeout(() => this.setState({ isLoading: false, url: "" }), 1000);
   };
 
-  // Read the URL from the input and validate it
+  // Read the URL from the input and reset validation errors
   handleInput: InputHandler = ({ target: { value } }) => {
     this.setState({ url: value });
-    this.setState({ error: !this.validateUrl(value) });
+    this.setState({ error: false });
   };
 
   render() {
