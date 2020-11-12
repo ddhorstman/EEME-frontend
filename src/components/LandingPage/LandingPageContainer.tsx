@@ -12,7 +12,7 @@ export default function LandingPageContainer(props: any) {
   ];
   const [links, setLinks] = useLocalStorage<EncodedLink[]>("links", initialLinks);
   return (
-    <div style={{ backgroundColor: "navy" }}>
+    <div >
       <Container maxWidth='md'>
         <RenderMainCard />
         {links && links.length > 0 &&  <RenderLinksCard links={links} />}
