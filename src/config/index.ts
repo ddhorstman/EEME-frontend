@@ -1,4 +1,3 @@
-import { constants } from "buffer";
 
 interface Configuration {
   backendUrl: string;

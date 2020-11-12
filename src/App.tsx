@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { LandingPage } from "./components/LandingPage";
 import { RedirectPage } from "./components/RedirectPage";
 
-function App() {
+const App: React.FC = () => {
   return (
     <Router>
       <Switch>
@@ -14,6 +14,6 @@ function App() {
       </Switch>
     </Router>
   );
-}
+};
 
 export default App;

@@ -8,7 +8,9 @@ interface MatchParams {
   encoded: string;
 }
 
-const RedirectPageContainer: React.FC<RouteComponentProps<MatchParams>> = ({
+interface Props extends RouteComponentProps<MatchParams> {}
+
+const RedirectPageContainer: React.FC<Props> = ({
   match: {
     params: { encoded },
   },
