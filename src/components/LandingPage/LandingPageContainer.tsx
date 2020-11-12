@@ -11,7 +11,6 @@ export default function LandingPageContainer(props: any) {
     { id: 2, target: "https://davidhorstman.com", encodedPath: "me" },
   ];
   const [links, setLinks] = useLocalStorage<EncodedLink[]>("links", initialLinks);
-  console.log("links", links, setLinks);
   return (
     <div style={{ backgroundColor: "navy" }}>
       <Container maxWidth='md'>

@@ -33,7 +33,7 @@ const RenderLinksCard: React.FC<Props> = ({ links }) => {
         </TableHead>
         <TableBody>
           {links?.map(link => (
-            <RenderLink link={link} />
+            <RenderLink key={link.id} link={link} />
           ))}
         </TableBody>
       </Table>
