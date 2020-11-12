@@ -1,4 +1,4 @@
-import { Button, Container, TextField } from "@material-ui/core";
+import { Box, Button, TextField } from "@material-ui/core";
 import React from "react";
 import { ButtonClickHandler, InputHandler } from "../../../types/formTypes";
 
@@ -18,18 +18,26 @@ const RenderLinkShortener: React.FC<Props> = ({
   helperText,
 }) => {
   return (
-    <Container>
+    <Box style={{ display: "flex", alignItems: "baseline" }}>
       <TextField
-        placeholder='Enter any link...'
+        style={{ minWidth: "500px" }}
+        variant='outlined'
+        placeholder='Me-ify your link'
         onInput={onInput}
         value={value}
         error={error}
         helperText={helperText}
       />
-      <Button onClick={onClick} color='primary'>
+      <Button
+        disabled={error}
+        onClick={onClick}
+        color='primary'
+        variant='contained'
+        size='large'
+      >
         Me-ify!
       </Button>
-    </Container>
+    </Box>
   );
 };
 

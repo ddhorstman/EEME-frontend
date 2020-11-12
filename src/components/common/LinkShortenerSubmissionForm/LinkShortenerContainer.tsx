@@ -28,13 +28,13 @@ class LinkShortenerSubmission extends React.Component<Props, State> {
 
   onInput: InputHandler = ({ target: { value } }) => {
     this.setState({ url: value });
-    console.log(this.validateUrl(value) + value);
+    this.setState({ error: !this.validateUrl(value) });
   };
 
   render() {
     return (
       <RenderLinkShortener
-        helperText={this.state.helperText}
+        helperText={this.state.error ? "Please enter a valid URL" : null}
         error={this.state.error}
         value={this.state.url}
         onClick={this.onClick}
