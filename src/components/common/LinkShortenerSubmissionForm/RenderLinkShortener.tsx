@@ -1,4 +1,12 @@
-import { Box, Button, CircularProgress, TextField } from "@material-ui/core";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  FormControl,
+  FormGroup,
+  FormHelperText,
+  OutlinedInput,
+} from "@material-ui/core";
 import React from "react";
 import { FormSubmissionHandler, InputHandler } from "../../../types/formTypes";
 
@@ -20,27 +28,29 @@ const RenderLinkShortener: React.FC<Props> = ({
   helperText,
 }) => {
   return (
-    <Box style={{ display: "flex", alignItems: "center" }}>
+    <Box>
       <form onSubmit={onSubmit}>
-        <TextField
-          disabled={isLoading}
-          style={{ minWidth: "500px" }}
-          variant='outlined'
-          placeholder='Me-ify your link'
-          onInput={onInput}
-          value={value}
-          error={error}
-          helperText={helperText}
-        />
-        <Button
-          onClick={() => onSubmit()}
-          disabled={error || isLoading}
-          color='primary'
-          variant='contained'
-          size='large'
-        >
-          {isLoading ? <CircularProgress /> : "Me-ify!"}
-        </Button>
+        <FormControl variant='outlined' error={error}>
+          <FormGroup style={{ flexDirection: "row" }}>
+            <OutlinedInput
+              placeholder='Me-ify your link...'
+              disabled={isLoading}
+              value={value}
+              onInput={onInput}
+              style={{ minWidth: "500px" }}
+            />
+            <Button
+              onClick={() => onSubmit()}
+              disabled={error || isLoading}
+              color='primary'
+              variant='contained'
+              size='large'
+            >
+              {isLoading ? <CircularProgress /> : "Me-ify!"}
+            </Button>
+          </FormGroup>
+          {error && <FormHelperText>{helperText}</FormHelperText>}
+        </FormControl>
       </form>
     </Box>
   );

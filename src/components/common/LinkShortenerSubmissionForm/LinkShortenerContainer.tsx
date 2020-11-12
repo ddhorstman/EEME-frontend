@@ -3,7 +3,7 @@ import { FormSubmissionHandler, InputHandler } from "../../../types/formTypes";
 import RenderLinkShortener from "./RenderLinkShortener";
 
 import { isHttpUri, isHttpsUri } from "valid-url";
-import { axiosWithoutAuth } from "../../../utils/axiosWithAuth";
+// import { axiosWithoutAuth } from "../../../utils/axiosWithAuth";
 
 interface Props {}
 interface State {
@@ -28,11 +28,14 @@ class LinkShortenerSubmission extends React.Component<Props, State> {
   onSubmit: FormSubmissionHandler = e => {
     e?.preventDefault();
     if (!this.state.error) {
-      this.setState({ isLoading: true, url: "" });
+      this.setState({ isLoading: true });
       // axiosWithoutAuth()
       //   .post("/links/encode", { target: this.state.url })
       //   .then(console.log);
-      window.setTimeout(() => this.setState({ isLoading: false }), 1000);
+      window.setTimeout(
+        () => this.setState({ isLoading: false, url: "" }),
+        1000
+      );
     }
   };
 
