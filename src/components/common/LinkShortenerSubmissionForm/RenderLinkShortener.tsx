@@ -15,13 +15,13 @@ interface Props {
   error: boolean;
   isLoading: boolean;
   helperText: string | null;
-  onInput: InputHandler;
-  onSubmit: FormSubmissionHandler;
+  handleInput: InputHandler;
+  handleSubmit: FormSubmissionHandler;
 }
 
 const RenderLinkShortener: React.FC<Props> = ({
-  onInput,
-  onSubmit,
+  handleInput,
+  handleSubmit,
   value,
   error,
   isLoading,
@@ -29,18 +29,19 @@ const RenderLinkShortener: React.FC<Props> = ({
 }) => {
   return (
     <Box>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={handleSubmit}>
         <FormControl variant='outlined' error={error}>
+          {/* Wrapping the elements in a FormGroup allows the Input and Button to stay aligned */}
           <FormGroup style={{ flexDirection: "row" }}>
             <OutlinedInput
               placeholder='Me-ify your link...'
               disabled={isLoading}
               value={value}
-              onInput={onInput}
+              onInput={handleInput}
               style={{ minWidth: "500px" }}
             />
             <Button
-              onClick={() => onSubmit()}
+              onClick={() => handleSubmit()}
               disabled={error || isLoading}
               color='primary'
               variant='contained'

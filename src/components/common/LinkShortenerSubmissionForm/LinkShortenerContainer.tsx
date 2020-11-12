@@ -10,7 +10,6 @@ interface State {
   url: string;
   error: boolean;
   isLoading: boolean;
-  helperText: null;
 }
 
 class LinkShortenerSubmission extends React.Component<Props, State> {
@@ -18,16 +17,27 @@ class LinkShortenerSubmission extends React.Component<Props, State> {
     url: "",
     error: false,
     isLoading: false,
-    helperText: null,
   };
 
+  /**
+   * Wrapper for the {@link https://www.npmjs.com/package/valid-url|valid-url} package
+   * to validate links and return a boolean value.
+   * @param value The URL to validate
+   */
   validateUrl = (value: string): boolean => {
     return !!(isHttpUri(value) || isHttpsUri(value));
   };
 
-  onSubmit: FormSubmissionHandler = e => {
+  handleSubmit: FormSubmissionHandler = e => {
+    // Stop the default form event from reloading the page
     e?.preventDefault();
+    // If the user hasn't entered a url, do nothing
+    if (this.state.url === "") return;
+
+    //If the url has been validated successfully, send a request to the backend
     if (!this.state.error) {
+      // TODO: Replace this with the real backend code
+
       this.setState({ isLoading: true });
       // axiosWithoutAuth()
       //   .post("/links/encode", { target: this.state.url })
@@ -39,7 +49,8 @@ class LinkShortenerSubmission extends React.Component<Props, State> {
     }
   };
 
-  onInput: InputHandler = ({ target: { value } }) => {
+  // Read the URL from the input and validate it
+  handleInput: InputHandler = ({ target: { value } }) => {
     this.setState({ url: value });
     this.setState({ error: !this.validateUrl(value) });
   };
@@ -51,8 +62,8 @@ class LinkShortenerSubmission extends React.Component<Props, State> {
         isLoading={this.state.isLoading}
         error={this.state.error}
         value={this.state.url}
-        onSubmit={this.onSubmit}
-        onInput={this.onInput}
+        handleSubmit={this.handleSubmit}
+        handleInput={this.handleInput}
       />
     );
   }
