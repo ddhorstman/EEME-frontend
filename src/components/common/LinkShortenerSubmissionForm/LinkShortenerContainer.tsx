@@ -1,13 +1,15 @@
 import React from "react";
-import { ButtonClickHandler, InputHandler } from "../../../types/formTypes";
+import { FormSubmissionHandler, InputHandler } from "../../../types/formTypes";
 import RenderLinkShortener from "./RenderLinkShortener";
 
 import { isHttpUri, isHttpsUri } from "valid-url";
+import { axiosWithoutAuth } from "../../../utils/axiosWithAuth";
 
 interface Props {}
 interface State {
   url: string;
   error: boolean;
+  isLoading: boolean;
   helperText: null;
 }
 
@@ -15,6 +17,7 @@ class LinkShortenerSubmission extends React.Component<Props, State> {
   state: State = {
     url: "",
     error: false,
+    isLoading: false,
     helperText: null,
   };
 
@@ -22,8 +25,15 @@ class LinkShortenerSubmission extends React.Component<Props, State> {
     return !!(isHttpUri(value) || isHttpsUri(value));
   };
 
-  onClick: ButtonClickHandler = () => {
-    console.log(this.state.url);
+  onSubmit: FormSubmissionHandler = e => {
+    e?.preventDefault();
+    if (!this.state.error) {
+      this.setState({ isLoading: true, url: "" });
+      // axiosWithoutAuth()
+      //   .post("/links/encode", { target: this.state.url })
+      //   .then(console.log);
+      window.setTimeout(() => this.setState({ isLoading: false }), 1000);
+    }
   };
 
   onInput: InputHandler = ({ target: { value } }) => {
@@ -35,9 +45,10 @@ class LinkShortenerSubmission extends React.Component<Props, State> {
     return (
       <RenderLinkShortener
         helperText={this.state.error ? "Please enter a valid URL" : null}
+        isLoading={this.state.isLoading}
         error={this.state.error}
         value={this.state.url}
-        onClick={this.onClick}
+        onSubmit={this.onSubmit}
         onInput={this.onInput}
       />
     );
