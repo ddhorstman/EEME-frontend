@@ -15,7 +15,7 @@ const RenderMainCard: React.FC<Props> = props => {
         EEME - The URL Me-ifier
       </Typography>
       <Typography variant='h4' style={paragraphStyle}>
-        EEME is the only URL shortener capable of converting your pesky,
+        EEME is the only URL obfuscator capable of converting your pesky,
         complicated URLs into a sublime combination of 'm's and 'e's.
       </Typography>
       {/* <Typography variant='h4' style={paragraphStyle}>
