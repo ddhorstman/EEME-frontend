@@ -18,10 +18,10 @@ const RenderMainCard: React.FC<Props> = props => {
         EEME is the only URL shortener capable of converting your pesky,
         complicated URLs into a sublime combination of 'm's and 'e's.
       </Typography>
-      <Typography variant='h4' style={paragraphStyle}>
+      {/* <Typography variant='h4' style={paragraphStyle}>
         Say no to products like bit.ly that optimize for fewest keystrokes - Let
         eeme optimize your URL for the fewest <em>unique</em> keystrokes!
-      </Typography>
+      </Typography> */}
       <LinkShortenerSubmissionForm />
     </Card>
   );
