@@ -1,5 +1,4 @@
-import { TableRow, TableCell, Link, Button } from "@material-ui/core";
-import { FileCopy } from "@material-ui/icons";
+import { TableRow, TableCell, Link, Button, Icon } from "@material-ui/core";
 import React from "react";
 import { EncodedLink } from "../../types/dataExchangeTypes";
 import CopyToClipboard from "react-copy-to-clipboard";
@@ -19,7 +18,7 @@ const RenderLink: React.FC<Props> = ({ link }) => {
         </Link>
         <CopyToClipboard text={eemeHref}>
           <Button>
-            <FileCopy />
+            <Icon>content_copy</Icon>
           </Button>
         </CopyToClipboard>
       </TableCell>
