@@ -6,4 +6,7 @@ export interface LinkContextValue {
   addLink: EncodedLinkHandler;
 }
 
-export const LinkContext = createContext<Partial<LinkContextValue>>({});
+export const LinkContext = createContext<LinkContextValue>({
+  links: [],
+  addLink: () => null,
+});
