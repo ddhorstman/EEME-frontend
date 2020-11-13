@@ -7,3 +7,9 @@ export interface EncodedLink {
   target: string;
   encodedPath: string;
 }
+
+export type EncodedLinkHandler = (link: EncodedLink | void | undefined) => void;
+
+export interface EEMEServerResponse {
+  data: EncodedLink;
+}

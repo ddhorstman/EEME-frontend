@@ -12,7 +12,7 @@ type LocalStorageDispatch<T> = (newValue: T | null) => void;
 export default function useLocalStorage<T = any>(
   key: string,
   initialValue: T | null = null
-): [value: T | null, setValue: LocalStorageDispatch<T>] {
+): [value: T, setValue: LocalStorageDispatch<T>] {
   const [value, setValue] = useState(() => {
     const item = window.localStorage.getItem(key);
     //null indicates that no item exists for that key

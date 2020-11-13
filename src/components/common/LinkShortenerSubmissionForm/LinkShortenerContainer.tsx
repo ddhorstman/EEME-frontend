@@ -3,7 +3,9 @@ import { FormSubmissionHandler, InputHandler } from "../../../types/formTypes";
 import RenderLinkShortener from "./RenderLinkShortener";
 
 import { isHttpUri, isHttpsUri } from "valid-url";
-// import { axiosWithoutAuth } from "../../../utils/axiosWithAuth";
+import { LinkContext } from "../../contexts/linkContext";
+import { axiosWithoutAuth } from "../../../utils/axiosWithAuth";
+import { EncodedLink } from "../../../types/dataExchangeTypes";
 
 interface Props {}
 interface State {
@@ -13,6 +15,9 @@ interface State {
 }
 
 class LinkShortenerSubmission extends React.Component<Props, State> {
+  static contextType = LinkContext;
+  context!: React.ContextType<typeof LinkContext>;
+
   state: State = {
     url: "",
     error: false,
@@ -40,13 +45,19 @@ class LinkShortenerSubmission extends React.Component<Props, State> {
       return;
     }
 
+    const { addLink } = this.context!;
+
     //If the url has been validated successfully, send a request to the backend
     // TODO: Replace this with the real backend code
     this.setState({ isLoading: true });
-    // axiosWithoutAuth()
-    //   .post("/links/encode", { target: this.state.url })
-    //   .then(console.log);
-    window.setTimeout(() => this.setState({ isLoading: false, url: "" }), 1000);
+
+    axiosWithoutAuth()
+      .post<EncodedLink>("/links/encode", { target: this.state.url })
+      .catch(console.error)
+      // .then(r=> {console.log("In axios "+r); return r;})
+      .then(r => r && r.data)
+      .then(addLink)
+      .finally(() => this.setState({ isLoading: false }));
   };
 
   // Read the URL from the input and reset validation errors
