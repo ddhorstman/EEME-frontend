@@ -48,7 +48,6 @@ class LinkShortenerSubmission extends React.Component<Props, State> {
     const { addLink } = this.context!;
 
     //If the url has been validated successfully, send a request to the backend
-    // TODO: Replace this with the real backend code
     this.setState({ isLoading: true });
 
     axiosWithoutAuth()
@@ -57,7 +56,7 @@ class LinkShortenerSubmission extends React.Component<Props, State> {
       // .then(r=> {console.log("In axios "+r); return r;})
       .then(r => r && r.data)
       .then(addLink)
-      .finally(() => this.setState({ isLoading: false }));
+      .finally(() => this.setState({ isLoading: false, url: "" }));
   };
 
   // Read the URL from the input and reset validation errors
